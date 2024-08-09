@@ -1,13 +1,13 @@
 # model settings
 _base_ = './pointpillars_hv_secfpn_8xb6-160e_kitti-3d-3class_on_arcs.py'
 # dataset settings
-dataset_type = 'KittiDataset'
+dataset_type = 'ArcsDataset'
 data_root = 'data/arcs/'
 class_names = ['Car']
 metainfo = dict(classes=class_names)
 backend_args = None
 
-point_cloud_range = [-30.955, 35.035, -10.25, 39.685, -14.16, 3.375]
+point_cloud_range = [-51.955, 26.035, -16.25, 39.685, -14.16, 3.375]
 
 model = dict(
     bbox_head=dict(
@@ -16,7 +16,7 @@ model = dict(
         anchor_generator=dict(
             _delete_=True,
             type='AlignedAnchor3DRangeGenerator',
-            ranges=[[-30.955, 35.035, -10.25, 39.685, -14.16, 3.375]],
+            ranges=[[-51.955, 26.035, -16.25, 39.685, -14.16, 3.375]],
             sizes=[[3.9, 1.6, 1.56]],
             rotations=[0, 1.57],
             reshape_out=True)),
@@ -38,7 +38,7 @@ db_sampler = dict(
     data_root=data_root,
     info_path=data_root + 'arcs_dbinfos_train.pkl',
     rate=1.0,
-    prepare=dict(filter_by_difficulty=[-1], filter_by_min_points=dict(Car=5)),
+    prepare=dict(filter_by_min_points=dict(Car=5)),
     classes=class_names,
     sample_groups=dict(Car=15),
     points_loader=dict(
@@ -57,7 +57,7 @@ train_pipeline = [
         use_dim=4,
         backend_args=backend_args),
     dict(type='LoadAnnotations3D', with_bbox_3d=True, with_label_3d=True),
-    dict(type='ObjectSample', db_sampler=db_sampler, use_ground_plane=True),
+    dict(type='ObjectSample', db_sampler=db_sampler, use_ground_plane=False),
     dict(type='RandomFlip3D', flip_ratio_bev_horizontal=0.5),
     dict(
         type='GlobalRotScaleTrans',

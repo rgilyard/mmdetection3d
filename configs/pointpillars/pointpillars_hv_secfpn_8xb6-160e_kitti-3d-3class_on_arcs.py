@@ -1,10 +1,10 @@
 _base_ = [
     '../_base_/models/pointpillars_hv_secfpn_kitti_on_arcs.py',
-    '../_base_/datasets/arcs.py',
+    '../_base_/datasets/arcs_dataset.py',
     '../_base_/schedules/cyclic-40e.py', '../_base_/default_runtime.py'
 ]
 
-point_cloud_range = [-30.955, 35.035, -10.25, 39.685, -14.16, 3.375]
+point_cloud_range = [-51.955, 26.035, -16.25, 39.685, -14.16, 3.375]
 # dataset settings
 data_root = 'data/arcs/'
 class_names = ['Pedestrian', 'Cyclist', 'Car']
@@ -17,7 +17,6 @@ db_sampler = dict(
     info_path=data_root + 'arcs_dbinfos_train.pkl',
     rate=1.0,
     prepare=dict(
-        filter_by_difficulty=[-1],
         filter_by_min_points=dict(Car=5, Pedestrian=5, Cyclist=5)),
     classes=class_names,
     sample_groups=dict(Car=15, Pedestrian=15, Cyclist=15),
@@ -38,7 +37,7 @@ train_pipeline = [
         use_dim=4,
         backend_args=backend_args),
     dict(type='LoadAnnotations3D', with_bbox_3d=True, with_label_3d=True),
-    dict(type='ObjectSample', db_sampler=db_sampler, use_ground_plane=True),
+    dict(type='ObjectSample', db_sampler=db_sampler, use_ground_plane=False),
     dict(type='RandomFlip3D', flip_ratio_bev_horizontal=0.5),
     dict(
         type='GlobalRotScaleTrans',

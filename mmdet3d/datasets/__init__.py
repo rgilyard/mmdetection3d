@@ -12,6 +12,7 @@ from .seg3d_dataset import Seg3DDataset
 from .semantickitti_dataset import SemanticKittiDataset
 from .sunrgbd_dataset import SUNRGBDDataset
 from .kitti_dataset_mod_0 import KittiDataset_mod_0
+from .arcs_dataset import ArcsDataset
 # yapf: disable
 from .transforms import (AffineResize, BackgroundPointsFilter, GlobalAlignment,
                          GlobalRotScaleTrans, IndoorPatchPointSample,
@@ -39,5 +40,5 @@ __all__ = [
     'VoxelBasedPointSampler', 'get_loading_pipeline', 'RandomDropPointsColor',
     'RandomJitterPoints', 'ObjectNameFilter', 'AffineResize',
     'RandomShiftScale', 'LoadPointsFromDict', 'Resize3D', 'RandomResize3D',
-    'KittiDataset_mod_0'
+    'KittiDataset_mod_0', 'ArcsDataset'
 ]

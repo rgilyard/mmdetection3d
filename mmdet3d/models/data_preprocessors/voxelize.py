@@ -131,7 +131,7 @@ class VoxelizationByGridShape(nn.Module):
                  voxel_size: List = [],
                  grid_shape: List[int] = [],
                  max_voxels: Union[tuple, int] = 20000,
-                 deterministic: bool = True):
+                 deterministic: bool = False):
         super().__init__()
         if voxel_size and grid_shape:
             raise ValueError('voxel_size is mutually exclusive grid_shape')

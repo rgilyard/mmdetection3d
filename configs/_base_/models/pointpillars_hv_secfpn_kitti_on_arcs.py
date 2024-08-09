@@ -7,7 +7,7 @@ model = dict(
         voxel=True,
         voxel_layer=dict(
             max_num_points=32,  # max_points_per_voxel
-            point_cloud_range=[-30.955, 35.035, -10.25, 39.685, -14.16, 3.375],
+            point_cloud_range=[-51.955, 26.035, -16.25, 39.685, -14.16, 3.375],
             voxel_size=voxel_size,
             max_voxels=(16000, 40000))),
     voxel_encoder=dict(
@@ -16,7 +16,7 @@ model = dict(
         feat_channels=[64],
         with_distance=False,
         voxel_size=voxel_size,
-        point_cloud_range=[-30.955, 35.035, -10.25, 39.685, -14.16, 3.375]),
+        point_cloud_range=[-51.955, 26.035, -16.25, 39.685, -14.16, 3.375]),
     middle_encoder=dict(
         type='PointPillarsScatter', in_channels=64, output_shape=[496, 432]),
     backbone=dict(
@@ -40,9 +40,9 @@ model = dict(
         anchor_generator=dict(
             type='AlignedAnchor3DRangeGenerator',
             ranges=[
-                [-30.955, 35.035, 0, 39.685, -14.16, 0],
-                [-30.955, 35.035, 0, 39.685, -14.16, 0],
-                [-30.955, 35.035, -5, 39.685, -14.16, -5],
+                [-51.955, 26.035, -4.25, 39.685, -14.16, -4.25],
+                [-51.955, 26.035, -4.25, 39.685, -14.16, -4.25],
+                [-51.955, 26.035, -12.25, 39.685, -14.16, -12.25],
             ],
             sizes=[[0.8, 0.6, 1.73], [1.76, 0.6, 1.73], [3.9, 1.6, 1.56]],
             rotations=[0, 1.57],
